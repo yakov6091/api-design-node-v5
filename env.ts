@@ -20,7 +20,7 @@ const envSchema = z.object({
 
   APP_STAGE: z.enum(['dev', 'test', 'production']).default('dev'),
 
-  PORT: z.coerce.number().positive().default(3000),
+  PORT: z.coerce.number().positive().default(4000),
   DATABASE_URL: z.string().startsWith('postgresql://'),
   JWT_SECRET: z.string().min(32, 'Must be 32 chars long'),
   JWT_EXPIRES_IN: z.string().default('7d'),
@@ -32,12 +32,12 @@ let env: Env
 
 try {
   env = envSchema.parse(process.env)
-} catch (e) {
-  if (e instanceof z.ZodError) {
+} catch (error) {
+  if (error instanceof z.ZodError) {
     console.log('Invalid env var')
-    console.error(JSON.stringify(e.flatten().fieldErrors, null, 2))
+    console.error(JSON.stringify(error.flatten().fieldErrors, null, 2))
 
-    e.issues.forEach((err) => {
+    error.issues.forEach((err) => {
       const path = err.path.join('.')
       console.log(`${path}: ${err.message}`)
     })
@@ -45,7 +45,7 @@ try {
     process.exit(1)
   }
 
-  throw e
+  throw error
 }
 
 export const isProd = () => env.APP_STAGE === 'production'
