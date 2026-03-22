@@ -1,24 +1,26 @@
 import { env as loadEnv } from 'custom-env'
 import { z } from 'zod'
 
-process.env.APP_STAGE = process.env.APP_STAGE || 'dev'
+// process.env.APP_STAGE = process.env.APP_STAGE || 'dev'
+
+loadEnv(process.env.APP_STAGE || 'development')
 
 const isProduction = process.env.APP_STAGE === 'production'
-const isDevelopment = process.env.APP_STAGE === 'dev'
+const isDevelopment = process.env.APP_STAGE === 'development'
 const isTesting = process.env.APP_STAGE === 'test'
 
-if (isDevelopment) {
-  loadEnv()
-} else if (isTesting) {
-  loadEnv('test')
-}
+// if (isDevelopment) {
+//   loadEnv()
+// } else if (isTesting) {
+//   loadEnv('test')
+// }
 
 const envSchema = z.object({
   NODE_ENV: z
     .enum(['development', 'test', 'production'])
     .default('development'),
 
-  APP_STAGE: z.enum(['dev', 'test', 'production']).default('dev'),
+  APP_STAGE: z.enum(['development', 'test', 'production']).default('development'),
 
   PORT: z.coerce.number().positive().default(4000),
   DATABASE_URL: z.string().startsWith('postgresql://'),
@@ -49,7 +51,7 @@ try {
 }
 
 export const isProd = () => env.APP_STAGE === 'production'
-export const isDev = () => env.APP_STAGE === 'dev'
+export const isDev = () => env.APP_STAGE === 'development'
 export const isTest = () => env.APP_STAGE === 'test'
 
 export { env }
