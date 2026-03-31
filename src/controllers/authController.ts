@@ -69,7 +69,7 @@ export const login = async (req: Request, res: Response) => {
             username: user.username
         });
 
-        return res.json({
+        return res.status(201).json({
             message: 'Login success',
             user: {
                 id: user.id,
@@ -80,7 +80,7 @@ export const login = async (req: Request, res: Response) => {
                 createdAt: user.createdAt
             },
             token,
-        }).status(201);
+        });
 
     } catch (error) {
         console.error('Loging error:', error);
