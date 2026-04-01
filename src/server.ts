@@ -18,9 +18,9 @@ app.use(morgan('dev', {
 }));
 
 // Error handler example
-app.use((_, __, next) => {
-    next(new APIError('validation error', 'ValidationError', 400));
-});
+// app.use((_, __, next) => {
+//     next(new APIError('validation error', 'ValidationError', 400));
+// });
 
 app.get('/health', (req, res) => {
     res.json({ message: 'hello' }).status(200);

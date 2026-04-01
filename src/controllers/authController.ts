@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 import bcrypt from 'bcrypt';
 import { db } from '../db/connection.ts';
-import { users, type newUser } from "../db/schema.ts";
+import { users, type NewUser } from "../db/schema.ts";
 import { generateToken } from "../utils/JWT.ts";
 import { comparePasswords, hashPassword } from "../utils/passwords.ts";
 import { hash } from "crypto";
@@ -9,7 +9,7 @@ import { eq } from "drizzle-orm";
 import { error } from "console";
 
 export const register = async (
-    req: Request<any, any, newUser>,
+    req: Request<any, any, NewUser>,
     res: Response
 ) => {
     try {

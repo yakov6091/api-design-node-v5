@@ -97,9 +97,11 @@ export const habitTagsRelations = relations(habitTags, ({ one }) => ({
     }),
 }));
 
+// Zod types
 export type User = typeof users.$inferSelect;
-export type newUser = typeof users.$inferInsert;
+export type NewUser = typeof users.$inferInsert;
 export type Habit = typeof habits.$inferSelect;
+export type NewHabit = typeof habits.$inferSelect;
 export type Entry = typeof entries.$inferSelect;
 export type Tag = typeof tags.$inferSelect;
 export type HabitTag = typeof habitTags.$inferSelect;
