@@ -4,12 +4,15 @@
   "description": "Habit Tracker API for Node.js course",
   "main": "src/index.ts",
   "type": "module",
+  "engines": {
+    "node": ">=24.3.0"
+  },
   "scripts": {
     "dev": "node --watch src/index.ts",
     "start": "node src/index.ts",
     "db:generate": "drizzle-kit generate",
     "db:push": "drizzle-kit push",
-    "db:migrade": "drizzle-kit migrade",
+    "db:migrate": "drizzle-kit migrate",
     "db:studio": "drizzle-kit studio",
     "db:seed": "cross-env NODE_ENV=development ts-node src/db/seed.ts",
     "test": "cross-env APP_STAGE=test vitest run",
